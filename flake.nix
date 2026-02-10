@@ -29,6 +29,8 @@
           packages = with pkgs; [
             bashInteractive
             xrandr
+            pinact
+            zizmor
           ];
           shellHook = ''
             export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${libraries}
