@@ -20,9 +20,26 @@ Minecraft 1.21.11 向けの Fabric Mod テンプレートです。Kotlin で記�
 
 ## セットアップ
 
+1. GitHub で「Use this template」からリポジトリを作成
+2. クローンして初期化スクリプトを実行
+
 ```bash
 git clone <repository-url>
-cd yukulabtemplate-template
+cd <your-repo-name>
+./init.sh
+```
+
+対話的に Mod ID・Mod 名・Maven グループを入力すると、ファイル内容・ファイル名・パッケージ構造が一括で置換されます。
+
+```
+Mod ID (小文字英数字、例: myawesomemod): myawesomemod
+Mod名 PascalCase (例: MyAwesomeMod): MyAwesomeMod
+Mavenグループ (例: com.example.mymod): com.example.mymod
+```
+
+3. ビルドして動作確認
+
+```bash
 ./gradlew build
 ```
 
