@@ -1,0 +1,51 @@
+{
+	"schemaVersion": 1,
+	"id": "yukulabtemplate",
+	"version": "${version}",
+	"name": "YukulabTemplate",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/yukulabtemplate/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			{
+				"value": "net.yukulab.template.YukulabTemplate",
+				"adapter": "kotlin"
+			}
+		],
+		"client": [
+			{
+				"value": "net.yukulab.template.YukulabTemplateClient",
+				"adapter": "kotlin"
+			}
+		],
+		"fabric-datagen": [
+			{
+				"value": "net.yukulab.template.YukulabTemplateDataGenerator",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"mixins": [
+		"yukulabtemplate.mixins.json",
+		{
+			"config": "yukulabtemplate.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*",
+		"fabric-language-kotlin": "*"
+	}
+}
