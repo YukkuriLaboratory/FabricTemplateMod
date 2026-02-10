@@ -1,15 +1,16 @@
 package net.yukulab.template
 
+import me.shedaniel.autoconfig.AutoConfig
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer
 import net.fabricmc.api.ModInitializer
 import org.slf4j.LoggerFactory
 
 object YukulabTemplate : ModInitializer {
-    private val logger = LoggerFactory.getLogger("yukulabtemplate")
+    const val MOD_ID = "yukulabtemplate"
+    private val logger = LoggerFactory.getLogger(MOD_ID)
 
-	override fun onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
-		logger.info("Hello Fabric world!")
-	}
+    override fun onInitialize() {
+        AutoConfig.register(ModConfig::class.java, ::Toml4jConfigSerializer)
+        logger.info("Hello Fabric world!")
+    }
 }

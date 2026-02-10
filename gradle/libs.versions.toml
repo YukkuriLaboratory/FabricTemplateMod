@@ -3,8 +3,10 @@ minecraft = "1.21.11"
 fabric-loader = "0.18.4"
 fabric-api = "0.141.3+1.21.11"
 fabric-kotlin = "1.13.9+kotlin.2.3.10"
+cloth-config = "21.11.153"
 fabric-loom = "1.15-SNAPSHOT"
 kotlin = "2.3.10"
+modmenu = "17.0.0-beta.2"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -12,6 +14,8 @@ fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-l
 fabric-loader-junit = { module = "net.fabricmc:fabric-loader-junit", version.ref = "fabric-loader" }
 fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
 fabric-language-kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "fabric-kotlin" }
+cloth-config = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref = "cloth-config" }
+modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 
 [plugins]
 fabric-loom-remap = { id = "net.fabricmc.fabric-loom-remap", version.ref = "fabric-loom" }

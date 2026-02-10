@@ -32,6 +32,12 @@
 				"value": "net.yukulab.template.YukulabTemplateDataGenerator",
 				"adapter": "kotlin"
 			}
+		],
+		"modmenu": [
+			{
+				"value": "net.yukulab.template.ModMenuIntegration",
+				"adapter": "kotlin"
+			}
 		]
 	},
 	"mixins": [
@@ -46,6 +52,10 @@
 		"minecraft": "~1.21.11",
 		"java": ">=21",
 		"fabric-api": "*",
-		"fabric-language-kotlin": "*"
+		"fabric-language-kotlin": "*",
+		"cloth-config": ">=21.11.153"
+	},
+	"suggests": {
+		"modmenu": "*"
 	}
 }

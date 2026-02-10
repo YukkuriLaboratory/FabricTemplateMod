@@ -31,6 +31,21 @@ Fabric Loomの **split environment source sets** を使用し、サーバー/ク
 
 MixinはJavaで記述する（Kotlin非対応）。互換レベルはJava 21。
 
+## Mod Config（設定システム）
+
+**Cloth Config Auto Config** + **ModMenu** による設定管理を使用。
+
+- `ModConfig.kt`（`src/main/`） — `@Config` アノテーション付き設定クラス。`ConfigData` を実装し、フィールドを `var` で定義するだけで設定項目になる。シリアライズは TOML（`Toml4jConfigSerializer`）。保存先は `config/yukulabtemplate.toml`。
+- `YukulabTemplate.onInitialize()` で `AutoConfig.register(ModConfig::class.java, ::Toml4jConfigSerializer)` により登録。
+- `ModMenuIntegration.kt`（`src/client/`） — `ModMenuApi` を実装し、ModMenu の設定ボタンから Cloth Config の設定画面を開く。`fabric.mod.json` の `modmenu` エントリポイントとして登録。
+
+設定値の取得:
+```kotlin
+val config = AutoConfig.getConfigHolder(ModConfig::class.java).config
+```
+
+設定項目の追加は `ModConfig` クラスにフィールドを追加するだけでよい。`@ConfigEntry` アノテーションでGUIのカスタマイズも可能。
+
 ## Key Configuration Files
 
 - `build.gradle.kts` — ビルドスクリプト（Kotlin DSL）
