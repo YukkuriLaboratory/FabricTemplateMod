@@ -15,6 +15,22 @@ Fabric Minecraft Mod (Minecraft 1.21.11) using Kotlin and Java 21. Mod ID: `yuku
 ./gradlew runDatagen     # データジェネレーション実行
 ```
 
+## Testing
+
+3種類のテストが用意されている。
+
+```bash
+./gradlew test               # ユニットテスト（src/test/）
+./gradlew runGameTest        # サーバーサイドゲームテスト（src/gametest/）
+./gradlew runClientGameTest  # クライアントサイドゲームテスト（src/gametest/）
+```
+
+- **ユニットテスト**: JUnit 5 + `fabric-loader-junit`。`Bootstrap.bootStrap()` でMinecraft環境をブートストラップしてからテストを実行する。
+- **サーバーゲームテスト**: Fabric Game Test API（`@GameTest` アノテーション）。`CustomTestMethodInvoker` を実装し、ゲーム内ワールドでブロックやエンティティの検証を行う。
+- **クライアントゲームテスト**: `FabricClientGameTest` インターフェース。クライアント描画やワールドの機能テストを行い、スクリーンショット撮影による検証も可能。
+
+テスト用ソースセットは `build.gradle.kts` の `fabricApi.configureTests` で自動生成される。ゲームテストは独自の `fabric.mod.json`（`src/gametest/resources/`）を持ち、テスト用Mod ID は `yukulabtemplate-test`。`eula = true` により、テスト実行時のMinecraft EULA同意は自動化されている。
+
 ## Architecture
 
 Fabric Loomの **split environment source sets** を使用し、サーバー/クライアントのコードを分離している。
