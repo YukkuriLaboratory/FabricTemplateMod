@@ -1,0 +1,18 @@
+{
+	"schemaVersion": 1,
+	"id": "yukulabtemplate-test",
+	"version": "1.0.0",
+	"name": "YukulabTemplate Test",
+	"environment": "*",
+	"entrypoints": {
+		"fabric-gametest": [
+			"net.yukulab.template.YukulabTemplateGameTest"
+		],
+		"fabric-client-gametest": [
+			"net.yukulab.template.YukulabTemplateClientGameTest"
+		]
+	},
+	"depends": {
+		"yukulabtemplate": "*"
+	}
+}

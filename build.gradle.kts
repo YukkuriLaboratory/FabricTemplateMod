@@ -34,6 +34,13 @@ fabricApi {
 	configureDataGeneration {
 		client = true
 	}
+	configureTests {
+		createSourceSet = true
+		modId = "yukulabtemplate-test"
+		enableGameTests = true
+		enableClientGameTests = true
+		eula = true
+	}
 }
 
 dependencies {
@@ -44,6 +51,13 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation(libs.fabric.api)
 	modImplementation(libs.fabric.language.kotlin)
+
+	// Unit test
+	testImplementation(libs.fabric.loader.junit)
+}
+
+tasks.test {
+	useJUnitPlatform()
 }
 
 tasks.processResources {
