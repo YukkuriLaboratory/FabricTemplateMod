@@ -33,6 +33,8 @@ MixinはJavaで記述する（Kotlin非対応）。互換レベルはJava 21。
 
 ## Key Configuration Files
 
+- `build.gradle.kts` — ビルドスクリプト（Kotlin DSL）
+- `settings.gradle.kts` — Gradleプロジェクト設定（Kotlin DSL）
 - `gradle/libs.versions.toml` — Version Catalog（Minecraft/Fabric/Kotlin の依存関係バージョン管理）
 - `gradle.properties` — Gradle設定とModメタデータ
 - `fabric.mod.json` — Modメタデータ、エントリポイント、依存関係定義（`${version}` はビルド時に `processResources` で展開）

@@ -1,14 +1,14 @@
 plugins {
 	alias(libs.plugins.fabric.loom.remap)
-	id 'maven-publish'
+	id("maven-publish")
 	alias(libs.plugins.kotlin.jvm)
 }
 
-version = project.mod_version
-group = project.maven_group
+version = project.property("mod_version") as String
+group = project.property("maven_group") as String
 
 base {
-	archivesName = project.archives_base_name
+	archivesName.set(project.property("archives_base_name") as String)
 }
 
 repositories {
@@ -23,12 +23,11 @@ loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		"yukulabtemplate" {
-			sourceSet sourceSets.main
-			sourceSet sourceSets.client
+		register("yukulabtemplate") {
+			sourceSet(sourceSets["main"])
+			sourceSet(sourceSets["client"])
 		}
 	}
-
 }
 
 fabricApi {
@@ -38,30 +37,30 @@ fabricApi {
 }
 
 dependencies {
-	minecraft libs.minecraft
-	mappings loom.officialMojangMappings()
-	modImplementation libs.fabric.loader
+	minecraft(libs.minecraft)
+	mappings(loom.officialMojangMappings())
+	modImplementation(libs.fabric.loader)
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation libs.fabric.api
-	modImplementation libs.fabric.language.kotlin
+	modImplementation(libs.fabric.api)
+	modImplementation(libs.fabric.language.kotlin)
 }
 
-processResources {
-	inputs.property "version", project.version
+tasks.processResources {
+	inputs.property("version", project.version)
 
 	filesMatching("fabric.mod.json") {
-		expand "version": inputs.properties.version
+		expand(mapOf("version" to inputs.properties["version"]))
 	}
 }
 
-tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
+tasks.withType<JavaCompile>().configureEach {
+	options.release.set(21)
 }
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-	kotlinOptions {
-		jvmTarget = 21
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+	compilerOptions {
+		jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
 	}
 }
 
@@ -75,20 +74,20 @@ java {
 	targetCompatibility = JavaVersion.VERSION_21
 }
 
-jar {
-	inputs.property "archivesName", project.base.archivesName
+tasks.jar {
+	inputs.property("archivesName", project.base.archivesName)
 
 	from("LICENSE") {
-		rename { "${it}_${inputs.properties.archivesName}"}
+		rename { "${it}_${inputs.properties["archivesName"]}" }
 	}
 }
 
 // configure the maven publication
 publishing {
 	publications {
-		create("mavenJava", MavenPublication) {
-			artifactId = project.archives_base_name
-			from components.java
+		create<MavenPublication>("mavenJava") {
+			artifactId = project.property("archives_base_name") as String
+			from(components["java"])
 		}
 	}
 
