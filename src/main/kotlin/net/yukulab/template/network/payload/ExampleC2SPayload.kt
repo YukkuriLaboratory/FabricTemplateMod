@@ -8,18 +8,19 @@ import net.minecraft.resources.Identifier
 import net.yukulab.template.MOD_ID
 import net.yukulab.template.id
 
-data class ExampleC2SPayload(
-    val action: String,
-) : CustomPacketPayload {
+data class ExampleC2SPayload(val action: String) : CustomPacketPayload {
     override fun type() = TYPE
 
     companion object {
-        val TYPE: CustomPacketPayload.Type<ExampleC2SPayload> = CustomPacketPayload.Type(
-            id("example_c2s"),
-        )
-        val STREAM_CODEC: StreamCodec<FriendlyByteBuf, ExampleC2SPayload> = StreamCodec.composite(
-            ByteBufCodecs.STRING_UTF8, ExampleC2SPayload::action,
-            ::ExampleC2SPayload,
-        )
+        val TYPE: CustomPacketPayload.Type<ExampleC2SPayload> =
+            CustomPacketPayload.Type(
+                id("example_c2s"),
+            )
+        val STREAM_CODEC: StreamCodec<FriendlyByteBuf, ExampleC2SPayload> =
+            StreamCodec.composite(
+                ByteBufCodecs.STRING_UTF8,
+                ExampleC2SPayload::action,
+                ::ExampleC2SPayload,
+            )
     }
 }

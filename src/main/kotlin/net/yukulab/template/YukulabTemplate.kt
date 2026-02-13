@@ -18,7 +18,7 @@ object YukulabTemplate : ModInitializer {
     private val job = SupervisorJob()
     val modDispatcher = Dispatchers.Default + job
     lateinit var serverDispatcher: CoroutineDispatcher
-      private set
+        private set
 
     override fun onInitialize() {
         AutoConfig.register(ModConfig::class.java, ::Toml4jConfigSerializer)

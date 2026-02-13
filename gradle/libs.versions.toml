@@ -7,6 +7,8 @@ cloth-config = "21.11.153"
 fabric-loom = "1.15-SNAPSHOT"
 kotlin = "2.3.10"
 modmenu = "17.0.0-beta.2"
+ktlint = "1.8.0"
+ktlint-gradle = "14.0.1"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -20,3 +22,4 @@ modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 [plugins]
 fabric-loom-remap = { id = "net.fabricmc.fabric-loom-remap", version.ref = "fabric-loom" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
