@@ -5,7 +5,8 @@ import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.resources.Identifier
-import net.yukulab.template.YukulabTemplate
+import net.yukulab.template.MOD_ID
+import net.yukulab.template.id
 
 data class ExampleS2CPayload(
     val message: String,
@@ -15,7 +16,7 @@ data class ExampleS2CPayload(
 
     companion object {
         val TYPE: CustomPacketPayload.Type<ExampleS2CPayload> = CustomPacketPayload.Type(
-            Identifier.fromNamespaceAndPath(YukulabTemplate.MOD_ID, "example_s2c"),
+            id("example_s2c"),
         )
         val STREAM_CODEC: StreamCodec<FriendlyByteBuf, ExampleS2CPayload> = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8, ExampleS2CPayload::message,
