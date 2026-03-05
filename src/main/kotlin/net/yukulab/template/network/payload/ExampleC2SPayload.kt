@@ -1,26 +1,19 @@
 package net.yukulab.template.network.payload
 
-import net.minecraft.network.FriendlyByteBuf
-import net.minecraft.network.codec.ByteBufCodecs
-import net.minecraft.network.codec.StreamCodec
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload
-import net.minecraft.resources.Identifier
-import net.yukulab.template.MOD_ID
+import net.minecraft.network.PacketByteBuf
 import net.yukulab.template.id
 
-data class ExampleC2SPayload(val action: String) : CustomPacketPayload {
-    override fun type() = TYPE
+data class ExampleC2SPayload(val action: String) {
+    fun write(buf: PacketByteBuf) {
+        buf.writeString(action)
+    }
 
     companion object {
-        val TYPE: CustomPacketPayload.Type<ExampleC2SPayload> =
-            CustomPacketPayload.Type(
-                id("example_c2s"),
-            )
-        val STREAM_CODEC: StreamCodec<FriendlyByteBuf, ExampleC2SPayload> =
-            StreamCodec.composite(
-                ByteBufCodecs.STRING_UTF8,
-                ExampleC2SPayload::action,
-                ::ExampleC2SPayload,
-            )
+        val ID = id("example_c2s")
+
+        fun read(buf: PacketByteBuf): ExampleC2SPayload {
+            val action = buf.readString()
+            return ExampleC2SPayload(action)
+        }
     }
 }

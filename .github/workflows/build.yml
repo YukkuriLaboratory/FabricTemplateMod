@@ -54,7 +54,7 @@ jobs:
       - name: setup jdk
         uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
         with:
-          java-version: "25"
+          java-version: "17"
           distribution: "microsoft"
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew

@@ -1,7 +1,7 @@
 package net.yukulab.template
 
 import kotlinx.coroutines.CoroutineDispatcher
-import net.minecraft.resources.Identifier
+import net.minecraft.util.Identifier
 import kotlin.coroutines.CoroutineContext
 
 internal const val MOD_ID = "yukulabtemplate"
@@ -14,4 +14,4 @@ internal val modDispatcher: CoroutineContext
 internal val serverDispatcher: CoroutineDispatcher
     get() = YukulabTemplate.serverDispatcher
 
-internal fun id(path: String) = Identifier.fromNamespaceAndPath(MOD_ID, path)
+internal fun id(path: String) = Identifier(MOD_ID, path)

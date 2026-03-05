@@ -1,19 +1,19 @@
 package net.yukulab.template
 
-import net.fabricmc.fabric.api.gametest.v1.CustomTestMethodInvoker
-import net.fabricmc.fabric.api.gametest.v1.GameTest
-import net.minecraft.gametest.framework.GameTestHelper
-import net.minecraft.world.level.block.Blocks
+import net.fabricmc.fabric.api.gametest.v1.FabricGameTest
+import net.minecraft.block.Blocks
+import net.minecraft.test.GameTest
+import net.minecraft.test.TestContext
 import java.lang.reflect.Method
 
-class YukulabTemplateGameTest : CustomTestMethodInvoker {
-    @GameTest
-    fun testAirBlockPresent(context: GameTestHelper) {
-        context.assertBlockPresent(Blocks.AIR, 0, 0, 0)
-        context.succeed()
+class YukulabTemplateGameTest : FabricGameTest {
+    @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
+    fun testAirBlockPresent(context: TestContext) {
+        context.expectBlock(Blocks.AIR, 0, 1, 0)
+        context.complete()
     }
 
-    override fun invokeTestMethod(context: GameTestHelper, method: Method) {
+    override fun invokeTestMethod(context: TestContext, method: Method) {
         method.invoke(this, context)
     }
 }

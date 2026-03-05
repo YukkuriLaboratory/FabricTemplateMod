@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.fabric.loom.remap)
+    alias(libs.plugins.fabric.loom)
     id("maven-publish")
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktlint)
@@ -36,14 +36,13 @@ fabricApi {
         createSourceSet = true
         modId = "yukulabtemplate-test"
         enableGameTests = true
-        enableClientGameTests = true
         eula = true
     }
 }
 
 dependencies {
     minecraft(libs.minecraft)
-    mappings(loom.officialMojangMappings())
+    mappings("net.fabricmc:yarn:${libs.versions.yarn.get()}:v2")
     modImplementation(libs.fabric.loader)
 
     // Fabric API. This is technically optional, but you probably want it anyway.
@@ -71,12 +70,12 @@ tasks.processResources {
 }
 
 tasks.withType<JavaCompile>().configureEach {
-    options.release.set(21)
+    options.release.set(17)
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     compilerOptions {
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
 }
 
@@ -86,8 +85,8 @@ java {
     // If you remove this line, sources will not be generated.
     withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 tasks.jar {

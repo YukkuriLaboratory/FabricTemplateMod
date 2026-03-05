@@ -7,9 +7,6 @@
 	"entrypoints": {
 		"fabric-gametest": [
 			"net.yukulab.template.YukulabTemplateGameTest"
-		],
-		"fabric-client-gametest": [
-			"net.yukulab.template.YukulabTemplateClientGameTest"
 		]
 	},
 	"depends": {

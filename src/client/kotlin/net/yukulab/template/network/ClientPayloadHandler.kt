@@ -8,8 +8,9 @@ object ClientPayloadHandler {
     private val logger = LoggerFactory.getLogger(ClientPayloadHandler::class.java)
 
     fun registerAll() {
-        ClientPlayNetworking.registerGlobalReceiver(ExampleS2CPayload.TYPE) { payload, context ->
-            logger.info("Received S2C message: '{}' with value {}", payload.message, payload.value)
+        ClientPlayNetworking.registerGlobalReceiver(ExampleS2CPayload.ID) { client, handler, buf, responseSender ->
+            val packet = ExampleS2CPayload.read(buf)
+            logger.info("Received S2C message: '{}' with value {}", packet.message, packet.value)
         }
     }
 }

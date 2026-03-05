@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Fabric Minecraft Mod (Minecraft 1.21.11) using Kotlin and Java 21. Mod ID: `yukulabtemplate`, package: `net.yukulab.template`.
+Fabric Minecraft Mod (Minecraft 1.20.1) using Kotlin and Java 17. Mod ID: `yukulabtemplate`, package: `net.yukulab.template`.
 
 ## Build Commands
 
@@ -17,17 +17,15 @@ Fabric Minecraft Mod (Minecraft 1.21.11) using Kotlin and Java 21. Mod ID: `yuku
 
 ## Testing
 
-3種類のテストが用意されている。
+2種類のテストが用意されている。
 
 ```bash
 ./gradlew test               # ユニットテスト（src/test/）
 ./gradlew runGameTest        # サーバーサイドゲームテスト（src/gametest/）
-./gradlew runClientGameTest  # クライアントサイドゲームテスト（src/gametest/）
 ```
 
-- **ユニットテスト**: JUnit 5 + `fabric-loader-junit`。`Bootstrap.bootStrap()` でMinecraft環境をブートストラップしてからテストを実行する。
-- **サーバーゲームテスト**: Fabric Game Test API（`@GameTest` アノテーション）。`CustomTestMethodInvoker` を実装し、ゲーム内ワールドでブロックやエンティティの検証を行う。
-- **クライアントゲームテスト**: `FabricClientGameTest` インターフェース。クライアント描画やワールドの機能テストを行い、スクリーンショット撮影による検証も可能。
+- **ユニットテスト**: JUnit 5 + `fabric-loader-junit`。`Bootstrap.initialize()` でMinecraft環境をブートストラップしてからテストを実行する。
+- **サーバーゲームテスト**: Fabric Game Test API（`@GameTest` アノテーション）。`FabricGameTest` を実装し、ゲーム内ワールドでブロックやエンティティの検証を行う。
 
 テスト用ソースセットは `build.gradle.kts` の `fabricApi.configureTests` で自動生成される。ゲームテストは独自の `fabric.mod.json`（`src/gametest/resources/`）を持ち、テスト用Mod ID は `yukulabtemplate-test`。`eula = true` により、テスト実行時のMinecraft EULA同意は自動化されている。
 
@@ -45,7 +43,7 @@ Fabric Loomの **split environment source sets** を使用し、サーバー/ク
 - `src/main/java/` — サーバーサイドMixin（設定: `yukulabtemplate.mixins.json`）
 - `src/client/java/` — クライアントサイドMixin（設定: `yukulabtemplate.client.mixins.json`）
 
-MixinはJavaで記述する（Kotlin非対応）。互換レベルはJava 21。
+MixinはJavaで記述する（Kotlin非対応）。互換レベルはJava 17。
 
 ## Mod Config（設定システム）
 
@@ -69,8 +67,8 @@ val config = AutoConfig.getConfigHolder(ModConfig::class.java).config
 - `gradle/libs.versions.toml` — Version Catalog（Minecraft/Fabric/Kotlin の依存関係バージョン管理）
 - `gradle.properties` — Gradle設定とModメタデータ
 - `fabric.mod.json` — Modメタデータ、エントリポイント、依存関係定義（`${version}` はビルド時に `processResources` で展開）
-- マッピング: `loom.officialMojangMappings()`（Mojang公式マッピング使用）
+- マッピング: Yarn マッピング使用
 
 ## CI
 
-GitHub Actions（`.github/workflows/build.yml`）がpush/PRで `./gradlew build` を実行。Java 25（Microsoft distribution）使用。
+GitHub Actions（`.github/workflows/build.yml`）がpush/PRで `./gradlew build` を実行。Java 17（Microsoft distribution）使用。
